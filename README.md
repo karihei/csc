@@ -1,2 +1,2 @@
 # csc
-### a Sails application
+### under construction.
