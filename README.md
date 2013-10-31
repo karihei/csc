@@ -1,0 +1,2 @@
+# csc
+### a Sails application
