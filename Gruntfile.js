@@ -29,6 +29,8 @@ module.exports = function (grunt) {
    */
 
   var cssFilesToInject = [
+    'linker/styles/bootstrap.min.css',
+    'linker/styles/pure-min.css',
     'linker/**/*.css'
   ];
 
