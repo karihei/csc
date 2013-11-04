@@ -2,10 +2,10 @@ body {
     padding:10px;
 }
 
-#right-container {
+#left-container {
     border-left: 2px solid #564b47;
     border-right: 2px solid #564b47;
-    width: 190px;
+    width: 15%;
     color: #564b47;
     margin: 0px;
     padding: 0px;

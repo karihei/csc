@@ -1,6 +1,6 @@
 <div class="container-csc container-fluid">
   <div class="row-fluid">
-      <div id="right-container" class="span2">
+      <div id="left-container" class="span2">
           <ul class="nav nav-list">
               <li class="nav-header">Challengers</li>
               <% for( var i in users ) {　%>
@@ -8,26 +8,30 @@
               <% } %>
           </ul>
       </div>
-      <div class="status-csc span10">
-          <div>user1</div>
-          <div class="span6">
-              <div class="item-csc req-item-csc">
-                  <div class="req-line-csc">
-                      GET /chk/env.cgi?key1=value1&key2=value2 HTTP/1.1
-                  </div>
-                  <div class="req-line-csc">
-                      GET /chk/env.cgi?key1=value1&key2=value2 HTTP/1.1
-                  </div>
-                  <div class="req-line-csc">
-                      GET /chk/env.cgi?key1=value1&key2=value2 HTTP/1.1
+      <div id="right-container" class="span9">
+          <div class="status-csc span12">
+              <div>user1</div>
+              <div class="span7">
+                  <div class="item-csc req-item-csc">
+                      <div class="req-line-csc">
+                          GET /chk/env.cgi?key1=value1&key2=value2 HTTP/1.1
+                      </div>
+                      <div class="req-line-csc">
+                          GET /chk/env.cgi?key1=value1&key2=value2 HTTP/1.1
+                      </div>
+                      <div class="req-line-csc">
+                          GET /chk/env.cgi?key1=value1&key2=value2 HTTP/1.1
+                      </div>
                   </div>
               </div>
-          </div>
-          <div class="span4">
-              <div class="item-csc graph-item-csc">
-
+              <div class="span4">
+                  <div class="item-csc graph-item-csc">
+                      <img src="/images/dummy_graph.png"/>
+                  </div>
               </div>
           </div>
       </div>
   </div>
 </div>
+
+<script type="text/javascript" src="/js/client.js"></script>
