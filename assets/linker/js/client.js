@@ -35,24 +35,26 @@ $(document).ready(function() {
      * @param {Event} evt
      */
     function handleDomainClick(evt) {
-        showStatusItem($(evt.currentTarget).text());
+        var el = $(evt.currentTarget);
+        showStatusItem(el.data('domainid'), el.text());
     }
 
     /**
      * domainのステータスを右ペインに生成する
-     * @param {string} domain
+     * @param {string} domainId
+     * @param {string} domainName
      */
-    function showStatusItem(domain) {
-        if (isAlreadyRender(domain)) {
+    function showStatusItem(domainId, domainName) {
+        if (isAlreadyRender(domainId)) {
             return;
         }
         var statusEjs = new EJS({url: '/linker/js/ejs/status.ejs'});
-        var statusHtml = statusEjs.render({name: domain});
+        var statusHtml = statusEjs.render({id: domainId, name: domainName});
         var rContainer = $('#right-container');
         rContainer.append($(statusHtml));
     }
 
-    function isAlreadyRender(domain) {
-        return $('#'+domain+'-csc').length > 0;
+    function isAlreadyRender(domainId) {
+        return $('#domain-'+domainId+'-csc').length > 0;
     }
 });

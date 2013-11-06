@@ -2,12 +2,12 @@
 // この設定は sails.config['users'] でアクセス可能
 module.exports = {
     users: [
-        {domain: 'hagihara.com'},
-        {domain: 'karix.jp'},
-        {domain: 'hagix.jp'},
-        {domain: 'hagihara.com'},
-        {domain: 'karikawa.com'},
-        {domain: 'csc.jp'},
-        {domain: 'hoge.com'}
+        {id: 1, domain: 'hagihara.com'},
+        {id: 2, domain: 'karix.jp'},
+        {id: 3, domain: 'hagix.jp'},
+        {id: 4, domain: 'hagihara.com'},
+        {id: 5, domain: 'karikawa.com'},
+        {id: 6, domain: 'csc.jp'},
+        {id: 7, domain: 'hoge.com'}
     ]
 };
