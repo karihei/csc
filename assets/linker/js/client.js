@@ -1,4 +1,4 @@
-SERVER_URI = document.location.protocol + '://' + document.domain + ':' + document.location.port;
+SERVER_URI = document.location.protocol + '//' + document.domain + ':' + document.location.port;
 socket = io.connect(SERVER_URI);
 
 $(document).ready(function() {
@@ -19,7 +19,10 @@ $(document).ready(function() {
     var sampleHekaData = {results: sampleResult};
 
     // hekaからのリクエストのモック TODO:あとで消す
-    socket.post('/path', sampleHekaData);
+    var mockF = function() {
+        socket.post('/path', sampleHekaData);
+    };
+    setInterval(mockF, 1000);
 
     // 新しくデータが来たらbroadcastされるのでここで受け取る
     socket.on('/updatestatus', function(result) {
