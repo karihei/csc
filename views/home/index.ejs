@@ -4,7 +4,7 @@
           <ul class="nav nav-list">
               <li class="nav-header">Challengers</li>
               <% for( var i in users ) {　%>
-              <li class="domain-csc" data-domainid="<%= users[i].id %>"><a href="#"><%= users[i].domain %></a></li>
+              <li class="domain-csc" data-domain="<%= users[i].domain %>"><a href="#"><%= users[i].domain %></a></li>
               <% } %>
           </ul>
       </div>

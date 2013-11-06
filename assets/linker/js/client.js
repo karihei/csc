@@ -22,11 +22,21 @@ $(document).ready(function() {
     var mockF = function() {
         socket.post('/path', sampleHekaData);
     };
-    setInterval(mockF, 1000);
+    setInterval(mockF, 5000);
 
     // 新しくデータが来たらbroadcastされるのでここで受け取る
     socket.on('/updatestatus', function(result) {
+        $.each(result.items, function(index, item) {
+            var status = getStatusElementByDomain(index);
+            if (status.length == 1) {
+                var reqBox = $('.req-item-csc', status);
+                $.each(item, function(i, p) {
+                    var newReqLineEl = $('<div/>').text(p.path);
+                    reqBox.prepend(newReqLineEl);
+                });
 
+            }
+        });
     });
 
 
@@ -39,25 +49,34 @@ $(document).ready(function() {
      */
     function handleDomainClick(evt) {
         var el = $(evt.currentTarget);
-        showStatusItem(el.data('domainid'), el.text());
+        showStatusItem(el.data('domain'));
     }
 
     /**
      * domainのステータスを右ペインに生成する
-     * @param {string} domainId
-     * @param {string} domainName
+     * @param {string} domain
      */
-    function showStatusItem(domainId, domainName) {
-        if (isAlreadyRender(domainId)) {
+    function showStatusItem(domain) {
+        if (isAlreadyRender(domain)) {
             return;
         }
         var statusEjs = new EJS({url: '/linker/js/ejs/status.ejs'});
-        var statusHtml = statusEjs.render({id: domainId, name: domainName});
+        var statusHtml = statusEjs.render({name: domain});
         var rContainer = $('#right-container');
         rContainer.append($(statusHtml));
     }
 
-    function isAlreadyRender(domainId) {
-        return $('#domain-'+domainId+'-csc').length > 0;
+    function isAlreadyRender(domain) {
+        return getStatusElementByDomain(domain).length > 0;
+    }
+
+    /**
+     * domainのstatusElを返す
+     * idにドットを含んでるとややこしい記法になるよ
+     * @param {string} domain
+     * @return {Array}
+     */
+    function getStatusElementByDomain(domain) {
+        return $("div[id='domain-"+domain+"-csc']");
     }
 });
