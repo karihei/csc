@@ -1,4 +1,4 @@
-SERVER_URI = 'http://' + document.domain + ':1337';
+SERVER_URI = document.location.protocol + '://' + document.domain + ':' + document.location.port;
 socket = io.connect(SERVER_URI);
 
 $(document).ready(function() {
