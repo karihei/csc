@@ -90,6 +90,13 @@ $(document).ready(function() {
     }
 
     /**
+     * 左ペインのdomain一覧から対象domainのElementを返す
+     */
+    function getListItemByDomain(domain) {
+        return $("li[id='list-"+domain+"-csc']");
+    }
+
+    /**
      * 飛んできたリクエストを各domainのreq-lineに追加する。
      */
     function addRequestLine(items) {
@@ -106,8 +113,29 @@ $(document).ready(function() {
                     }
                     reqBox.prepend(newReqLineEl);
                 });
-
+                updateTimestamp(status, index);
             }
         });
+    }
+
+    /**
+     * timestampを更新する。ついでにiconをピカーンとさせる。
+     * @param {Element} el
+     * @param {string} domain
+      */
+    function updateTimestamp(el, domain) {
+        var datetime = new Date($.now()).toLocaleString();
+        $('.status-datetime-value-csc', el).text(datetime);
+        var icon = $('.status-datetime-icon-csc', el);
+        icon.show().fadeOut(1000, 'swing');
+
+/*
+var listItem = getListItemByDomain(domain);
+        var domainLabel = $('.domain-label-csc', listItem);
+        domainLabel.removeClass('label-info').addClass('label-warning').text('Updated').delay(1000, function(){
+            debugger;
+            domainLabel.removeClass('label-warning').addClass('label-info').text('Opened');
+        });*/
+
     }
 });

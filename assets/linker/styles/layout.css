@@ -60,7 +60,7 @@ body {
 
 .item-csc {
     position: relative;
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 39px 5px 14px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -89,4 +89,14 @@ body {
 
 .domain-label-csc {
     margin-right: 5px;
+}
+
+.status-title-csc {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0px 0px 1px;
+}
+
+.status-datetime-csc {
+    margin: 9px 0px 0px 2px;
 }
