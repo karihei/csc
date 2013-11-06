@@ -11,6 +11,10 @@ body {
     padding: 0px;
 }
 
+#right-container {
+    max-height: 400px;
+}
+
 .item-csc:after{
     content: "result";
     position: absolute;
@@ -52,4 +56,21 @@ body {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+}
+
+.req-item-csc {
+    overflow: scroll;
+    max-height: 400px;
+}
+
+.row-csc {
+    margin-left: 0;
+}
+
+.req-line-csc {
+    background: #eaffeb;
+}
+
+.req-line-csc.even-csc {
+    background: #c9ffb8;
 }

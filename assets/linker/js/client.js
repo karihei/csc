@@ -31,7 +31,10 @@ $(document).ready(function() {
             if (status.length == 1) {
                 var reqBox = $('.req-item-csc', status);
                 $.each(item, function(i, p) {
-                    var newReqLineEl = $('<div/>').text(p.path);
+                    var newReqLineEl = $('<div/>').text(p.path).addClass('req-line-csc');
+                    if (reqBox.children().length % 2 == 0) {
+                        newReqLineEl.addClass('even-csc');
+                    }
                     reqBox.prepend(newReqLineEl);
                 });
 
