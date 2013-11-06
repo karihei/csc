@@ -16,7 +16,7 @@ $(document).ready(function() {
         ]);
     });
 
-    var sampleHekaData = {results: sampleResult};
+    var sampleHekaData = {items: sampleResult};
 
     // hekaからのリクエストのモック TODO:あとで消す
     var mockF = function() {

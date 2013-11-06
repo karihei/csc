@@ -5,7 +5,7 @@ module.exports = {
        // API から渡ってきたPathとかdomainとかを含めた配列
        // [{domain:'a.com',path:'/k'}, {domain:'a.com', path:'/k'}...]
        // みたいな感じで来るからdomainごとにデータをまとめる
-       var items = req.param('results');
+       var items = req.param('items');
        var obj = {};
        $.each(items, function(index, item) {
            var value = {path: item.path};
@@ -16,7 +16,7 @@ module.exports = {
            }
        });
 
-       req.socket.emit('/updatestatus', {results: obj});
+       req.socket.emit('/updatestatus', {items: obj});
    },
     _config: {}
 };
