@@ -24,28 +24,32 @@ $(document).ready(function() {
     };
     setInterval(mockF, 5000);
 
-    // 新しくデータが来たらbroadcastされるのでここで受け取る
-    socket.on('/updatestatus', function(result) {
-        $.each(result.items, function(index, item) {
-            var status = getStatusElementByDomain(index);
-            if (status.length == 1) {
-                var reqBox = $('.req-item-csc', status);
-                $.each(item, function(i, p) {
-                    var newReqLineEl = $('<div/>').text(p.path).addClass('req-line-csc');
-                    if (reqBox.children().length % 2 == 0) {
-                        newReqLineEl.addClass('even-csc');
-                    }
-                    reqBox.prepend(newReqLineEl);
-                });
+    init();
 
-            }
+    /**
+     */
+    function init() {
+        setClickHandler();
+        setUpdateHandler();
+    }
+
+    /**
+     * 左ペインのdomain一覧をclickしたとき
+     */
+    function setClickHandler() {
+        $('.domain-csc').each(function(index, el) {
+            $(el).click(handleDomainClick);
         });
-    });
+    }
 
-
-    $('.domain-csc').each(function(index, el) {
-        $(el).click(handleDomainClick);
-    });
+    /**
+     * 新しくデータが来たらbroadcastされるのでここで受け取っていろいろ処理する
+     */
+    function setUpdateHandler() {
+        socket.on('/updatestatus', function(result) {
+            addRequestLine(result.items);
+        });
+    }
 
     /**
      * @param {Event} evt
@@ -53,6 +57,8 @@ $(document).ready(function() {
     function handleDomainClick(evt) {
         var el = $(evt.currentTarget);
         showStatusItem(el.data('domain'));
+        var label = $('.domain-label-csc', el);
+        label.show();
     }
 
     /**
@@ -65,7 +71,7 @@ $(document).ready(function() {
         }
         var statusEjs = new EJS({url: '/linker/js/ejs/status.ejs'});
         var statusHtml = statusEjs.render({name: domain});
-        var rContainer = $('#right-container');
+        var rContainer = $('#right-container-csc');
         rContainer.append($(statusHtml));
     }
 
@@ -81,5 +87,27 @@ $(document).ready(function() {
      */
     function getStatusElementByDomain(domain) {
         return $("div[id='domain-"+domain+"-csc']");
+    }
+
+    /**
+     * 飛んできたリクエストを各domainのreq-lineに追加する。
+     */
+    function addRequestLine(items) {
+        $.each(items, function(index, item) {
+            var status = getStatusElementByDomain(index);
+            if (status.length == 1) {
+                var reqBox = $('.req-item-csc', status);
+                $('.req-empty-csc', status).remove();
+
+                $.each(item, function(i, p) {
+                    var newReqLineEl = $('<div/>').text(p.path).addClass('req-line-csc');
+                    if (reqBox.children().length % 2 == 0) {
+                        newReqLineEl.addClass('even-csc');
+                    }
+                    reqBox.prepend(newReqLineEl);
+                });
+
+            }
+        });
     }
 });

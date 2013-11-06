@@ -1,15 +1,15 @@
-<div class="container-csc container-fluid">
-  <div class="row-fluid">
-      <div id="left-container" class="span2">
-          <ul class="nav nav-list">
-              <li class="nav-header">Challengers</li>
-              <% for( var i in users ) {　%>
-              <li class="domain-csc" data-domain="<%= users[i].domain %>"><a href="#"><%= users[i].domain %></a></li>
-              <% } %>
-          </ul>
-      </div>
-      <div id="right-container" class="span9">
+<div id="container-csc">
+    <span id="left-container-csc">
+        <ul class="nav nav-list">
+            <li class="nav-header">Challengers</li>
+            <% for( var i in users ) {　%>
+            <li class="domain-csc" data-domain="<%= users[i].domain %>">
+                <a href="#"><span class="domain-label-csc label label-info" style="display: none;">Opened</span><%= users[i].domain %></a>
+            </li>
+            <% } %>
+        </ul>
+    </span>
+    <span id="right-container-csc">
 
-      </div>
-  </div>
+    </span>
 </div>

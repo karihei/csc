@@ -2,17 +2,25 @@ body {
     padding:10px;
 }
 
-#left-container {
+#container-csc {
+    width: 5000px;
+}
+
+#left-container-csc {
     border-left: 2px solid #564b47;
     border-right: 2px solid #564b47;
-    width: 15%;
+    width: 200px;
     color: #564b47;
     margin: 0px;
     padding: 0px;
+    display: inline-block;
+    float: left;
 }
 
-#right-container {
+#right-container-csc {
+    display: inline-block;
     max-height: 400px;
+    width: 80%;
 }
 
 .item-csc:after{
@@ -40,11 +48,14 @@ body {
 }
 
 .status-csc {
+    display: inline-block;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     border: 2px solid #564b47;
     padding: 0px 6px;
+    width: 300px;
+    margin-left: 10px;
 }
 
 .item-csc {
@@ -61,6 +72,7 @@ body {
 .req-item-csc {
     overflow: scroll;
     max-height: 400px;
+    height: 400px;
 }
 
 .row-csc {
@@ -73,4 +85,8 @@ body {
 
 .req-line-csc.even-csc {
     background: #c9ffb8;
+}
+
+.domain-label-csc {
+    margin-right: 5px;
 }
