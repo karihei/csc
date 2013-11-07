@@ -23,6 +23,12 @@ body {
     width: 80%;
 }
 
+.list-header-csc {
+    font-weight: bold;
+    font-size: 17px;
+    padding-left: 7px;
+}
+
 .item-csc:after{
     content: "result";
     position: absolute;
@@ -43,11 +49,15 @@ body {
     content: "Requests";
 }
 
+.graph-item-csc img {
+    width: 100%;
+}
+
 .graph-item-csc:after {
     content: "Graph";
 }
-
 .status-csc {
+    position: relative;
     display: inline-block;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -56,6 +66,23 @@ body {
     padding: 0px 6px;
     width: 300px;
     margin-left: 10px;
+}
+
+.status-close-csc {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    width: 26px !important;
+    height: 26px;
+    padding: 6px;
+    -webkit-border-radius: 17px;
+    -moz-border-radius: 17px;
+    border-radius: 17px;
+}
+
+.status-close-csc:hover {
+    background: #ffdad8;
 }
 
 .item-csc {
@@ -70,7 +97,8 @@ body {
 }
 
 .req-item-csc {
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     max-height: 400px;
     height: 400px;
 }
@@ -80,7 +108,11 @@ body {
 }
 
 .req-line-csc {
+    padding: 5px;
+    min-width: 300px;
     background: #eaffeb;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .req-line-csc.even-csc {
@@ -89,6 +121,10 @@ body {
 
 .domain-label-csc {
     margin-right: 5px;
+}
+
+.domain-csc a {
+    padding: 5px 0 4px 10px !important;
 }
 
 .status-title-csc {

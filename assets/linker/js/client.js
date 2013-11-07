@@ -1,5 +1,6 @@
 SERVER_URI = document.location.protocol + '//' + document.domain;
 socket = io.connect(SERVER_URI);
+MAX_REQ_LINE = 20; // request lineの最大表示行数
 
 $(document).ready(function() {
     init();
@@ -40,6 +41,19 @@ $(document).ready(function() {
     }
 
     /**
+     * 閉じるボタンを押した時
+     * @param {Event} evt
+     */
+    function handleCloseClick(evt) {
+        var parentEl = $(evt.currentTarget).parent();
+        if (parentEl) {
+            parentEl.remove();
+        }
+        var listItem = getListItemByDomain(parentEl.data('domain'));
+        $('.domain-label-csc', listItem).hide();
+    }
+
+    /**
      * domainのステータスを右ペインに生成する
      * @param {string} domain
      */
@@ -50,7 +64,11 @@ $(document).ready(function() {
         var statusEjs = new EJS({url: '/linker/js/ejs/status.ejs'});
         var statusHtml = statusEjs.render({name: domain});
         var rContainer = $('#right-container-csc');
-        rContainer.append($(statusHtml));
+        var statusEl = $(statusHtml);
+        rContainer.append(statusEl);
+
+        var closeButton = $('.status-close-csc', statusEl);
+        closeButton.click(handleCloseClick);
     }
 
     function isAlreadyRender(domain) {
@@ -86,10 +104,15 @@ $(document).ready(function() {
 
                 $.each(item, function(i, p) {
                     var newReqLineEl = $('<div/>').text(p.path).addClass('req-line-csc');
-                    if (reqBox.children().length % 2 == 0) {
+                    var firstLine = reqBox.children().first();
+
+                    if (firstLine && !firstLine.hasClass('even-csc')) {
                         newReqLineEl.addClass('even-csc');
                     }
                     reqBox.prepend(newReqLineEl);
+                    if (reqBox.children().length > MAX_REQ_LINE) {
+                        reqBox.children().last().remove();
+                    }
                 });
                 updateTimestamp(status, index);
             }

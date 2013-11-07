@@ -1,7 +1,7 @@
 <div id="container-csc">
     <span id="left-container-csc">
-        <ul class="nav nav-list">
-            <li class="nav-header">Challengers</li>
+        <ul class="nav nav-pills nav-stacked">
+            <li class="list-header-csc">Challengers</li>
             <% for( var i in users ) {　%>
             <li id="list-<%= users[i].domain %>-csc" class="domain-csc" data-domain="<%= users[i].domain %>">
                 <a href="#"><span class="domain-label-csc label label-info" style="display: none;">Opened</span><%= users[i].domain %></a>
