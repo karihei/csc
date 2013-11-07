@@ -2,28 +2,6 @@ SERVER_URI = document.location.protocol + '//' + document.domain + ':' + documen
 socket = io.connect(SERVER_URI);
 
 $(document).ready(function() {
-    var sampleDomains = ['karix.jp', 'hagix.jp', 'hagihara.com', 'karikawa.com', 'csc.jp', 'hoge.com'];
-    var sampleResult = [];
-
-    $.each(sampleDomains, function(index, domain) {
-        sampleResult = $.merge(sampleResult, [
-            {domain: domain, path: '/k/10'},
-            {domain: domain, path: '/k/12'},
-            {domain: domain, path: '/k/admin/app/flow?app=1'},
-            {domain: domain, path: '/k/admin/app/general?app=11'},
-            {domain: domain, path: '/k/m/10'},
-            {domain: domain, path: '/k/#/space/1/21'}
-        ]);
-    });
-
-    var sampleHekaData = {items: sampleResult};
-
-    // hekaからのリクエストのモック TODO:あとで消す
-    var mockF = function() {
-        socket.post('/path', sampleHekaData);
-    };
-    setInterval(mockF, 5000);
-
     init();
 
     /**
