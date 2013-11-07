@@ -70,7 +70,7 @@ body {
 
 .status-close-csc {
     position: absolute;
-    top: 5px;
+    top: 7px;
     right: 5px;
     cursor: pointer;
     width: 26px !important;
@@ -130,9 +130,22 @@ body {
 .status-title-csc {
     font-size: 20px;
     font-weight: bold;
-    padding: 10px 0px 0px 1px;
+    padding: 6px 0px 0px 1px;
 }
 
 .status-datetime-csc {
-    margin: 9px 0px 0px 2px;
+    font-size: 12px;
+    margin: 18px 0px 0px 2px;
+}
+
+.status-datetime-icon-csc {
+    font-size: 13px;
+}
+
+.status-hr-csc {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    border-top: 2px solid;
+    padding-right: 298px;
 }
