@@ -47,7 +47,7 @@ $(document).ready(function() {
     function handleCloseClick(evt) {
         var parentEl = $(evt.currentTarget).parent();
         if (parentEl) {
-            parentEl.remove();
+            parentEl.fadeOut(200).queue(function() {this.remove()});
         }
         var listItem = getListItemByDomain(parentEl.data('domain'));
         $('.domain-label-csc', listItem).hide();
