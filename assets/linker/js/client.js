@@ -176,8 +176,8 @@ var listItem = getListItemByDomain(domain);
         };
         this._width = 270;
         this._height = 210;
-        this._tick_interval = 10 * 1000; // 10[sec]
-        this._time_window = 600 * 1000; // 10[min]
+        this._tick_interval = 5 * 1000; // 10[sec]
+        this._time_window = 180 * 1000; // 10[min]
         this._paths = {};
     }
 
@@ -250,8 +250,8 @@ var listItem = getListItemByDomain(domain);
             })
             .y(function(d, i) {
                 var h = y(d.value);
-                if(h > max_height) {
-                    h = max_height - 5;
+                if(h < 0) {
+                    h = 5;
                 }
                 return h;
             });
