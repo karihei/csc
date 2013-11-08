@@ -214,9 +214,9 @@ var listItem = getListItemByDomain(domain);
             .datum(this._data[time])
             .attr('class', 'line line-time')
 
-        this.tick('access', [0, 500]);
-        this.tick('meanRequestSize', [0, 1000000]);
-        this.tick('meanResponseTime', [0, 5]);
+        this.tick('access', [-5, 50]);
+        this.tick('meanRequestSize', [-10000, 100000]);
+        this.tick('meanResponseTime', [-0.5, 5]);
     }
 
     /**
