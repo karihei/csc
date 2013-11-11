@@ -15,6 +15,8 @@ $(document).ready(function() {
             setUpdateHandler(socket);
         });
 
+        createStatusItems();
+
         var domainParam = getUrlHashes()['d'];
         if (domainParam) {
             showStatusItem(domainParam);
@@ -85,14 +87,14 @@ $(document).ready(function() {
      */
     function handleDomainClick(evt) {
         var el = $(evt.currentTarget);
-        showStatusItem(el.data('domain'));
+        showStatusItem(el.data('domain'), true);
         var label = $('.domain-label-opened-csc', el);
         label.show();
     }
 
     function expandAllDomain() {
         $('.domain-csc').each(function(index, el) {
-            showStatusItem($(el).data('domain'));
+            showStatusItem($(el).data('domain'), true);
             var label = $('.domain-label-opened-csc', el);
             label.show();
         });
@@ -105,17 +107,23 @@ $(document).ready(function() {
     function handleCloseClick(evt) {
         var parentEl = $(evt.currentTarget).parent();
         if (parentEl) {
-            parentEl.fadeOut(200).queue(function() {this.remove()});
+            parentEl.fadeOut(200);
         }
         var listItem = getListItemByDomain(parentEl.data('domain'));
         $('.domain-label-opened-csc', listItem).hide();
+    }
+
+    function createStatusItems() {
+        $('.domain-csc').each(function(index, el) {
+            createStatusItem($(el).data('domain'));
+        });
     }
 
     /**
      * domainのステータスを右ペインに生成する
      * @param {string} domain
      */
-    function showStatusItem(domain) {
+    function createStatusItem(domain) {
         if (isAlreadyRender(domain) || !isChallenger(domain)) {
             return;
         }
@@ -123,6 +131,7 @@ $(document).ready(function() {
         var statusHtml = statusEjs.render({name: domain});
         var rContainer = $('#right-container-csc');
         var statusEl = $(statusHtml);
+        statusEl.hide();
         rContainer.append(statusEl);
 
         var closeButton = $('.status-close-csc', statusEl);
@@ -131,6 +140,11 @@ $(document).ready(function() {
         var graph = new StatGraph(domain);
         graph.render();
         statusEl[0].__graph__ = graph;
+    }
+
+    function showStatusItem(domain, visible) {
+        var el = getStatusElementByDomain(domain);
+        visible ? $(el).show() : $(el).hide();
     }
 
     function isAlreadyRender(domain) {
