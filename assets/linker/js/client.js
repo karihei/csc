@@ -1,5 +1,4 @@
 SERVER_URI = document.location.protocol + '//' + document.domain;
-socket = io.connect(SERVER_URI);
 MAX_REQ_LINE = 20; // request lineの最大表示行数
 
 $(document).ready(function() {
@@ -9,7 +8,14 @@ $(document).ready(function() {
      */
     function init() {
         setClickHandler();
-        setUpdateHandler();
+        var socket = initWSocket();
+        setUpdateHandler(socket);
+        $('button.ws-reconnect-csc').click(function(){
+            socket.disconnect();
+            socket = initWSocket();
+            socket.socket.connect();
+            setUpdateHandler(socket);
+        });
     }
 
     /**
@@ -23,13 +29,42 @@ $(document).ready(function() {
         $('.list-expand-csc').each(function(index, el) {
             $(el).click(expandAllDomain);
         });
+    }
 
+    /**
+     * Web Socket の初期化を行い、接続状態を通知するようにする
+     */
+    function initWSocket() {
+        socket = io.connect(SERVER_URI);
+
+        $connectLabel = $('.ws-state-connect-csc');
+        $disconnectLabel = $('.ws-state-disconnect-csc');
+        connected = function() {
+            $connectLabel.show();
+            $disconnectLabel.hide();
+        }
+        disconnected = function() {
+            $connectLabel.hide();
+            $disconnectLabel.show();
+        }
+
+        socket.on('connect', function(){
+            connected();
+        });
+        socket.on('disconnect', function(){
+            disconnected();
+        });
+        socket.on('error', function(){
+            disconnected();
+        });
+
+        return socket;
     }
 
     /**
      * 新しくデータが来たらbroadcastされるのでここで受け取っていろいろ処理する
      */
-    function setUpdateHandler() {
+    function setUpdateHandler(socket) {
         socket.on('/updatestatus', function(result) {
             addRequestLine(result.items);
         });

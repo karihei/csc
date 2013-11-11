@@ -30,9 +30,14 @@ body {
     padding-left: 7px;
 }
 
+.ws-reconnect-csc,
 .list-expand-csc {
     margin-left: 20px;
     padding: 2px;
+}
+
+.ws-state-csc .label {
+    margin-left: 10px;
 }
 
 .item-csc:after{
