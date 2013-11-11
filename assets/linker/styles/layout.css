@@ -149,3 +149,24 @@ body {
     border-top: 2px solid;
     padding-right: 298px;
 }
+
+.line {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
+.line-access {
+    stroke: #d88;
+}
+
+.line-size {
+    stroke: #8d8;
+}
+
+.line-time {
+    stroke: #88d;
+}
+
+.graph-bg {
+    fill: #112;
+}

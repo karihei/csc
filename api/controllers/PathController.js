@@ -5,7 +5,7 @@ module.exports = {
        // API から渡ってきたPathとかdomainとかを含めた配列
        // [{domain:'a.com',path:'/k'}, {domain:'a.com', path:'/k'}...]
        // みたいな感じで来るからdomainごとにデータをまとめる
-       var items = req.param('items');
+       var items = req.body;
        var obj = {};
        for(var i=0;i<items.length;i++){
            var item = items[i];
