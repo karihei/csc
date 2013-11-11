@@ -2,8 +2,6 @@ SERVER_URI = document.location.protocol + '//' + document.domain;
 MAX_REQ_LINE = 20; // request lineの最大表示行数
 
 $(document).ready(function() {
-    init();
-
     /**
      */
     function init() {
@@ -16,6 +14,14 @@ $(document).ready(function() {
             socket.socket.connect();
             setUpdateHandler(socket);
         });
+
+        var domainParam = getUrlHashes()['d'];
+        if (domainParam) {
+            showStatusItem(domainParam);
+            var el = getStatusElementByDomain(domainParam)
+            var label = $('.domain-label-opened-csc', el);
+            label.show();
+        }
     }
 
     /**
@@ -110,7 +116,7 @@ $(document).ready(function() {
      * @param {string} domain
      */
     function showStatusItem(domain) {
-        if (isAlreadyRender(domain)) {
+        if (isAlreadyRender(domain) || !isChallenger(domain)) {
             return;
         }
         var statusEjs = new EJS({url: '/linker/js/ejs/status.ejs'});
@@ -132,6 +138,14 @@ $(document).ready(function() {
     }
 
     /**
+     * 指定domainが参加者のものならtrue
+     * @param {string} domain
+     */
+    function isChallenger(domain) {
+        return getListItemByDomain(domain).length > 0;
+    }
+
+    /**
      * domainのstatusElを返す
      * idにドットを含んでるとややこしい記法になるよ
      * @param {string} domain
@@ -146,6 +160,17 @@ $(document).ready(function() {
      */
     function getListItemByDomain(domain) {
         return $("li[id='list-"+domain+"-csc']");
+    }
+
+    function getUrlHashes() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
     }
 
     /**
@@ -320,4 +345,6 @@ $(document).ready(function() {
             }
         }
     }
+
+    init();
 });
