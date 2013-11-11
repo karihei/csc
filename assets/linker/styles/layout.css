@@ -2,10 +2,6 @@ body {
     padding:10px;
 }
 
-#container-csc {
-    width: 5000px;
-}
-
 #left-container-csc {
     border-left: 2px solid #564b47;
     border-right: 2px solid #564b47;
@@ -18,7 +14,6 @@ body {
 }
 
 #right-container-csc {
-    position: fixed;
     display: inline-block;
     max-height: 400px;
     width: 80%;
@@ -32,7 +27,7 @@ body {
 
 .ws-reconnect-csc,
 .list-expand-csc {
-    margin-left: 20px;
+    margin-left: 10px;
     padding: 2px;
 }
 
