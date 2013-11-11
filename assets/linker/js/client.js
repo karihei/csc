@@ -40,7 +40,7 @@ $(document).ready(function() {
     function handleDomainClick(evt) {
         var el = $(evt.currentTarget);
         showStatusItem(el.data('domain'));
-        var label = $('.domain-label-csc', el);
+        var label = $('.domain-label-opened-csc', el);
         label.show();
     }
 
@@ -54,7 +54,7 @@ $(document).ready(function() {
             parentEl.fadeOut(200).queue(function() {this.remove()});
         }
         var listItem = getListItemByDomain(parentEl.data('domain'));
-        $('.domain-label-csc', listItem).hide();
+        $('.domain-label-opened-csc', listItem).hide();
     }
 
     /**
@@ -124,6 +124,11 @@ $(document).ready(function() {
                 });
                 updateTimestamp(status, index);
             }
+
+            // 更新が来たらupdateラベルを貼り付け
+            var listItem = getListItemByDomain(index);
+            var updateLabel = $('.domain-label-update-csc', listItem);
+            updateLabel.show();
         });
     }
 
@@ -137,15 +142,6 @@ $(document).ready(function() {
         $('.status-datetime-value-csc', el).text(datetime);
         var icon = $('.status-datetime-icon-csc', el);
         icon.show().fadeOut(1000, 'swing');
-
-/*
-var listItem = getListItemByDomain(domain);
-        var domainLabel = $('.domain-label-csc', listItem);
-        domainLabel.removeClass('label-info').addClass('label-warning').text('Updated').delay(1000, function(){
-            debugger;
-            domainLabel.removeClass('label-warning').addClass('label-info').text('Opened');
-        });*/
-
     }
 
     /**

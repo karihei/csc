@@ -4,7 +4,11 @@
             <li class="list-header-csc">Challengers</li>
             <% for( var i in users ) {　%>
             <li id="list-<%= users[i].domain %>-csc" class="domain-csc" data-domain="<%= users[i].domain %>">
-                <a href="#"><span class="domain-label-csc label label-info" style="display: none;">Opened</span><%= users[i].domain %></a>
+                <a href="#">
+                    <span class="domain-label-opened-csc label label-info" style="display: none;">Opened</span>
+                    <span class="domain-label-update-csc label label-warning" style="display: none;">Update</span>
+                    <%= users[i].domain %>
+                    </a>
             </li>
             <% } %>
         </ul>
