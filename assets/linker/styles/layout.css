@@ -30,6 +30,11 @@ body {
     padding-left: 7px;
 }
 
+.list-expand-csc {
+    margin-left: 20px;
+    padding: 2px;
+}
+
 .item-csc:after{
     content: "result";
     position: absolute;

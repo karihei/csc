@@ -1,7 +1,8 @@
 <div id="container-csc">
     <span id="left-container-csc">
         <ul class="nav nav-pills nav-stacked">
-            <li class="list-header-csc">Challengers</li>
+            <li class="list-header-csc">Challengers<button type="button" class="list-expand-csc btn btn-default navbar-btn">expand</button></li>
+
             <% for( var i in users ) {　%>
             <li id="list-<%= users[i].domain %>-csc" class="domain-csc" data-domain="<%= users[i].domain %>">
                 <a href="#">

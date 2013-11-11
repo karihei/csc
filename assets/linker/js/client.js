@@ -19,6 +19,11 @@ $(document).ready(function() {
         $('.domain-csc').each(function(index, el) {
             $(el).click(handleDomainClick);
         });
+
+        $('.list-expand-csc').each(function(index, el) {
+            $(el).click(expandAllDomain);
+        });
+
     }
 
     /**
@@ -42,6 +47,14 @@ $(document).ready(function() {
         showStatusItem(el.data('domain'));
         var label = $('.domain-label-opened-csc', el);
         label.show();
+    }
+
+    function expandAllDomain() {
+        $('.domain-csc').each(function(index, el) {
+            showStatusItem($(el).data('domain'));
+            var label = $('.domain-label-opened-csc', el);
+            label.show();
+        });
     }
 
     /**
