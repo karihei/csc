@@ -24,6 +24,19 @@ $(document).ready(function() {
             var label = $('.domain-label-opened-csc', el);
             label.show();
         }
+
+        $('button.auto-expand-csc').click(function(evt){
+            var el = $(evt.currentTarget);
+            if(el.hasClass('active')){
+                el.removeClass('active');
+            } else {
+                el.addClass('active');
+            }
+        })
+    }
+
+    autoExpand = function() {
+        return $('button.auto-expand-csc').hasClass('active');
     }
 
     /**
@@ -74,6 +87,11 @@ $(document).ready(function() {
      */
     function setUpdateHandler(socket) {
         socket.on('/updatestatus', function(result) {
+            if(autoExpand()) {
+                $.each(result.items, function(domain){
+                    openDomainStatus(domain);
+                })
+            }
             addRequestLine(result.items);
         });
 
@@ -87,17 +105,19 @@ $(document).ready(function() {
      */
     function handleDomainClick(evt) {
         var el = $(evt.currentTarget);
-        showStatusItem(el.data('domain'), true);
-        var label = $('.domain-label-opened-csc', el);
-        label.show();
+        openDomainStatus(el.data('domain'));
     }
 
     function expandAllDomain() {
         $('.domain-csc').each(function(index, el) {
-            showStatusItem($(el).data('domain'), true);
-            var label = $('.domain-label-opened-csc', el);
-            label.show();
+            openDomainStatus($(el).data('domain'));
         });
+    }
+
+    function openDomainStatus(domain) {
+        showStatusItem(domain, true);
+        var label = $('#list-' + domain + '-csc .domain-label-opened-csc');
+        label.show();
     }
 
     /**

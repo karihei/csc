@@ -26,6 +26,7 @@ body {
 }
 
 .ws-reconnect-csc,
+.auto-expand-csc,
 .list-expand-csc {
     margin-left: 10px;
     padding: 2px;
