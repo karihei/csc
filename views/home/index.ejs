@@ -4,10 +4,12 @@
             <li class="list-header-csc">Connection
             </li>
             <li class="ws-state-csc">
+                <button type="button" class="ws-reconnect-csc btn btn-default navbar-btn">reconnect</button>
                 <span class="ws-state-connect-csc label label-success" style="display: none;">Connect</span>
                 <span class="ws-state-disconnect-csc label label-danger" style="display: none;">Disconnect</span>
-                <button type="button" class="ws-reconnect-csc btn btn-default navbar-btn">reconnect</button>
             </li>
+            <li class="list-header-csc">HeatMap</li>
+                <button class="heatmap-open-csc btn btn-default" data-toggle="modal" data-target="#heatmapModal">open</button>
             <li class="list-header-csc">Challengers</li>
             <li>
                 <button type="button" class="list-expand-csc btn btn-default navbar-btn">expand all</button>
@@ -25,6 +27,19 @@
         </ul>
     </span>
     <span id="right-container-csc">
-
     </span>
+    <div class="modal fade" id="heatmapModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title">Activity HeatMap</h3>
+          </div>
+          <div class="modal-body">
+              <h4>heatmap is created by last 1 min total request count.</h4>
+              <div class="heatmap-csc"></div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>

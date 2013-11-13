@@ -33,6 +33,7 @@ $(document).ready(function() {
                 el.addClass('active');
             }
         })
+        var heatmap = new HeatMap();
     }
 
     autoExpand = function() {
@@ -378,6 +379,104 @@ $(document).ready(function() {
                 break;
             }
         }
+    }
+
+    /**
+     * HeatMap 描画クラス
+     */
+    var HeatMap = function() {
+        var c = d3.scale.linear()
+            .domain([0, 8])
+            .range(['#1e90ff', '#dc143c'])
+        var colors = $.map(Array(9), function(v, i){
+            return c(i);
+        })
+        this._colorScale = d3.scale.quantile()
+            .domain([0, 30])
+            .range(colors);
+        var colorScale = this._colorScale;
+
+        var gridSize = 35;
+        var legendElementWidth = 55;
+
+        var domains = [];
+        $('.domain-csc').each(function(index, el) {
+            domains.push($(el).data('domain'));
+        });
+        var initialData = $.map(domains, function(d){
+            return {domain: d, accessCount: 0};
+        })
+        var cols = 14;
+        var rows = Math.ceil((initialData.length / cols));
+
+        this._svg = d3.select('.heatmap-csc').append('svg')
+            .attr('width', 570)
+            .attr('height', 570)
+            .append('g')
+            .attr('transform', 'translate(10,10)')
+
+        this._heatmap = this._svg.selectAll('.heat-domain')
+            .data(initialData, function(d){
+                return d.domain;
+            })
+
+        var domain = this._heatmap.enter()
+            .append('g')
+            .attr('class', 'heat-domain')
+            .attr('transform', function(d, i){
+                var x = (i % cols) * gridSize;
+                var y = Math.floor(i / cols) * gridSize;
+                return 'translate(' + x + ',' + y + ')';
+            })
+
+        domain
+            .append('rect')
+            .attr('rx', 4)
+            .attr('ry', 4)
+            .attr('width', gridSize)
+            .attr('height', gridSize)
+            .style('fill', function(d){
+                return colorScale(d.accessCount)
+            })
+            .on('click', function(d){
+                openDomainStatus(d.domain);
+            })
+
+        domain
+            .append('text')
+            .attr('class', 'heatmap-tooltip')
+            .text(function(d){return d.domain;})
+
+        this._legend = this._svg.selectAll('.legend')
+            .data([0].concat(colorScale.quantiles()), function(d) { return d; })
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+
+        this._legend.append('rect')
+            .attr('x', function(d, i) { return legendElementWidth * i; })
+            .attr('y', gridSize * (rows + 1))
+            .attr('width', legendElementWidth)
+            .attr('height', gridSize / 2)
+            .style('fill', function(d, i) { return colors[i]; });
+
+        this._legend.append('text')
+            .attr('class', 'mono')
+            .text(function(d) { return '≥ ' + Math.round(d); })
+            .attr('x', function(d, i) { return legendElementWidth * i; })
+            .attr('y', gridSize * (rows + 2));
+    }
+
+    HeatMap.prototype.update = function(items) {
+        var colorScale = this._colorScale;
+        this._heatmap.data(items, function(d){
+            return d.domain;
+        })
+            .transition()
+                .duration(1000)
+                .style('fill', function(d){
+                    return colorScale(d.accessCount)
+                })
     }
 
     init();

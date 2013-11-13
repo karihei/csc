@@ -26,6 +26,7 @@ body {
 }
 
 .ws-reconnect-csc,
+.heatmap-open-csc,
 .auto-expand-csc,
 .list-expand-csc {
     margin-left: 10px;
@@ -176,4 +177,17 @@ body {
 
 .graph-bg {
     fill: #112;
+}
+
+.heat-domain rect {
+    cursor: pointer;
+    stroke: #E6E6E6;
+    stroke-width: 4px;
+}
+
+.heat-domain .heatmap-tooltip {
+    pointer-events: none;
+}
+.heat-domain:not(:hover) .heatmap-tooltip {
+    display: none;
 }
