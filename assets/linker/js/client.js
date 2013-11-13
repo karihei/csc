@@ -34,6 +34,7 @@ $(document).ready(function() {
             }
         })
         var heatmap = new HeatMap();
+        $('.heatmap-csc')[0].__heatmap__ = heatmap;
     }
 
     autoExpand = function() {
@@ -98,6 +99,10 @@ $(document).ready(function() {
 
         socket.on('/updategraph', function(result) {
             updateGraphs(result);
+        });
+
+        socket.on('/updateheat', function(result) {
+            $('.heatmap-csc')[0].__heatmap__.update(result);
         });
     }
 
@@ -429,7 +434,7 @@ $(document).ready(function() {
                 return 'translate(' + x + ',' + y + ')';
             })
 
-        domain
+        this._rect = domain
             .append('rect')
             .attr('rx', 4)
             .attr('ry', 4)
@@ -469,7 +474,7 @@ $(document).ready(function() {
 
     HeatMap.prototype.update = function(items) {
         var colorScale = this._colorScale;
-        this._heatmap.data(items, function(d){
+        this._rect.data(items, function(d){
             return d.domain;
         })
             .transition()
