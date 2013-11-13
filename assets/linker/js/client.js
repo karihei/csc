@@ -19,7 +19,7 @@ $(document).ready(function() {
 
         var domainParam = getUrlHashes()['d'];
         if (domainParam) {
-            showStatusItem(domainParam);
+            showStatusItem(domainParam, true);
             var el = getStatusElementByDomain(domainParam)
             var label = $('.domain-label-opened-csc', el);
             label.show();
